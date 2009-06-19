@@ -17,7 +17,7 @@ let astar start successors costs equal goal =
   let rec work queue closed =
     let (_, { path = p ; costs_so_far = gp }, queue) = Pqueue.extract queue
     in let x = List.hd p
-    in 
+    in
       if List.exists (equal x) closed then
 	work queue closed
       else if equal x goal then
@@ -25,7 +25,7 @@ let astar start successors costs equal goal =
       else
 	let closed = x :: closed
 	and queue =
-	  List.fold_left (function q -> function (y, cy) ->
+	  List.fold_left (fun q (y, cy) ->
 			    Pqueue.insert q (gp + cy + (costs y))
 			      { path = (y :: p) ; costs_so_far = gp + cy })
 	    queue (successors x)

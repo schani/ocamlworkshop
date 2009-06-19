@@ -2,8 +2,8 @@
 
 type priority = int
 
-type 'a queue = 
-  | Empty 
+type 'a queue =
+  | Empty
   | Node of priority * 'a * 'a queue * 'a queue
 
 exception Queue_is_empty
@@ -33,4 +33,3 @@ let rec remove_top = function
 let extract = function
   | Empty -> raise Queue_is_empty
   | Node(prio, elt, _, _) as queue -> (prio, elt, remove_top queue)
-
